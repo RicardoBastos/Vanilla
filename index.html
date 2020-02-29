@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>App Html</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: min-content 1fr;
+      }
+
+      header {
+        padding: 20px;
+        background: linear-gradient(to bottom, #336, #779);
+        color: #fff;
+        text-align: center;
+        position: relative;
+      }
+
+      @keyframes loading {
+        0% {
+          left: 0;
+          width: 0vw;
+        }
+        50% {
+          left: 0;
+          width: 100vw;
+        }
+        100% {
+          left: 100vw;
+          width: 0vw;
+        }
+      }
+
+      body.loading header::after {
+        content: " ";
+        display: block;
+        background: #990;
+        position: absolute;
+        bottom: 0;
+        height: 5px;
+        animation-name: loading;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+
+      footer {
+        padding: 20px;
+        background: linear-gradient(to top, #336, #779);
+        color: #fff;
+        text-align: center;
+      }
+
+      section {
+        padding: 20px;
+        max-width: 960px;
+        width: 100vh;
+        margin: 0 auto;
+        overflow: auto;
+      }
+
+      section div {
+        margin: 20px 0;
+        display: block;
+        color: #444;
+      }
+
+      section form label {
+        margin: 20px 0;
+        display: block;
+        color: #444;
+      }
+
+      section form input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #999;
+        width: 100%;
+      }
+
+      section form button {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #999;
+        width: 100%;
+        background: #336;
+        color: #fff;
+      }
+
+      section > div {
+        position: relative;
+        display: none;
+        left: 0;
+        transition: left 0.3s;
+      }
+
+      section > div.active {
+        display: block;
+      }
+
+      body.loading section > div {
+        left: -100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Título do App</h1>
+    </header>
+    <section>
+      <div class="active" id="login">
+        <h2>Bem vindo</h2>
+        <p>
+          Faça login para entrar
+        </p>
+        <form action="">
+          <div>
+            <label for="email">
+              E-mail
+            </label>
+            <input type="email" />
+          </div>
+
+          <div>
+            <label for="senha">
+              Senha
+            </label>
+            <input type="password" />
+          </div>
+
+          <button>Salvar</button>
+        </form>
+      </div>
+
+      <div id="pagina1">
+        <h2>Aqui vai a primeira página</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages, and
+          more recently with desktop publishing software like Aldus PageMaker
+          including versions of Lorem Ipsum.
+        </p>
+
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with
+          the release of Letraset sheets containing Lorem Ipsum passages, and
+          more recently with desktop publishing software like Aldus PageMaker
+          including versions of Lorem Ipsum.
+        </p>
+      </div>
+    </section>
+    <footer>&copy 2019 - RB</footer>
+
+    <script>
+      window.addEventListener("load", () => {
+        document.querySelector("#login form").addEventListener("submit", e => {
+          e.preventDefault();
+          document.body.classList.add("loading");
+
+          setTimeout(() => {
+            document.querySelector("#login").classList.remove("active");
+          }, 300);
+
+          setTimeout(() => {
+            document.querySelector("#pagina1").classList.add("active");
+
+            setTimeout(() => {
+              document.body.classList.remove("loading");
+            }, 2000);
+          }, 300);
+        });
+      });
+    </script>
+  </body>
+</html>
